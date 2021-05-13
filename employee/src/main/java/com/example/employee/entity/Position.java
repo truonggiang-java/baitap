@@ -1,0 +1,68 @@
+package com.example.employee.entity;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="positionVP")
+public class Position {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name="id")
+	private Integer id;
+	
+	@Column(name="name_position")
+	private String name;
+	
+	@OneToMany(mappedBy = "position",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private Set<Employee> employee = new HashSet<>();
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Set<Employee> getEmployee() {
+		return employee;
+	}
+
+	public void setEmployee(Set<Employee> employee) {
+		this.employee = employee;
+	}
+
+	public Position(Integer id, String name, Set<Employee> employee) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.employee = employee;
+	}
+
+	public Position() {
+		super();
+	}
+	
+
+	
+	
+}
